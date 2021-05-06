@@ -4,10 +4,10 @@ import Abstract.BasePlayerManager;
 import Abstract.PlayerCheckService;
 import Entities.Player;
 
-public class GamePlayerManager extends BasePlayerManager {
+public class PlayerManager extends BasePlayerManager {
 private PlayerCheckService playerCheck;
 
-public GamePlayerManager(PlayerCheckService playerCheck) {
+public PlayerManager(PlayerCheckService playerCheck) {
 	this.playerCheck = playerCheck;
 }
 @Override

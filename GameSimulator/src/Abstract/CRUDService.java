@@ -1,9 +1,7 @@
 package Abstract;
 
-import Entities.Player;
-
-public interface CRUDService {
-	void add(Player player);
-	void update(Player player);
-	void delete(Player player);
+public interface CRUDService <T> {
+	void add(T entity);
+	void update(T entity);
+	void delete(T entity);	
 }
