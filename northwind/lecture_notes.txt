@@ -1,0 +1,6 @@
+- maven -> paket yönetimini yaptýðýmýz yerin adý
+
+- Anatasyon -> Bir class ýn çalýþma anýnda derleme anýnda bilgi toplamak için kullanýlan deðer. Product Bi r entitiy dir
+
+- jpaRe -> Verdiðin veri tipi için yani entitiy annotasyonu için süslenmiþ nesne için (product) primaryKey alanýný ver sorgularý ona göre hazýrlayayým.
+- public interface ProductDao extends JpaRepository<Product, Integer>{ Hangi tabloya hangi id veri tipiyle sorgularýn hazýrlanmasý gerektiði söyleniyor
