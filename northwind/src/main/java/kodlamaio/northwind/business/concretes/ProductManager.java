@@ -15,6 +15,7 @@ import kodlamaio.northwind.core.utilities.results.SuccessResult;
 import kodlamaio.northwind.core.utilities.results.SucessDataResult;
 import kodlamaio.northwind.dataAccess.abstracts.ProductDao;
 import kodlamaio.northwind.entities.concretes.Product;
+import kodlamaio.northwind.entities.dtos.ProductWithCategoryDto;
 
 @Service // Business katmani oldugunu belirtiyoruz
 public class ProductManager implements ProductService {
@@ -94,5 +95,10 @@ public class ProductManager implements ProductService {
 	public DataResult<List<Product>> getAllSorted() {
 		Sort sort = Sort.by(Sort.Direction.ASC, "productName");
 		return new SucessDataResult<List<Product>>(this.productDao.findAll(sort), "Başarılı");
+	}
+
+	@Override
+	public DataResult<List<ProductWithCategoryDto>> getProductWithCategoryDetails() {
+		return new SucessDataResult<List<ProductWithCategoryDto>>(this.productDao.getProductWithCategoryDetails(), "Data Listelendi");
 	}
 }

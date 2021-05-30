@@ -2,6 +2,7 @@ package kodlamaio.hrms.business.concretes;
 
 import java.util.List;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import kodlamaio.hrms.business.abstracts.AuthenticationService;
@@ -25,6 +26,15 @@ public class CandidateManager implements CandidateService {
     private UserDao userDao;
     private VerificationCandidateService verificationCandidateService;
     
+    @Autowired
+	public CandidateManager(CandidateDao candidateDao, UserDao userDao,
+			VerificationCandidateService verificationCandidateService) {
+		super();
+		this.candidateDao = candidateDao;
+		this.userDao = userDao;
+		this.verificationCandidateService = verificationCandidateService;
+	}
+	
 	@Override
 	public DataResult<List<Candidate>> getAll() {
 		return new SuccessDataResult<List<Candidate>>(candidateDao.findAll(), "Candidate listelendi");
@@ -33,7 +43,8 @@ public class CandidateManager implements CandidateService {
 	@Override
 	public Result add(Candidate candidate) {
 		CandidateValidator validator = new CandidateValidator(candidateDao,userDao);
-        Result[] validators = new Result[]{
+     // System.out.println("-----" + validator.isEmailTaken("deneme@gmail.com"));
+		Result[] validators = new Result[]{
                 validator.areAllInformationFilledOnRegister(candidate),
                 validator.isEmailTaken(candidate.getEmail()),
                 validator.arePasswordsSame(candidate.getPassword(), candidate.getPassword()),
@@ -65,6 +76,7 @@ public class CandidateManager implements CandidateService {
 
         return new SuccessResult("Kayıt işlemi "+candidate.getEmail()+" adresinize gelecek olan onay kodu ile hesabınızı onaylayınız.");
     }
+
 
 	@Override
 	public Result verifyAccountByVerificationCode(String email, String code) {

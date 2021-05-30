@@ -28,12 +28,13 @@ public class CandidateValidator extends UserValidator {
            candidate.getFirstName().equals("") ||
            candidate.getLastName().equals("")
         ) {
-            return new ErrorResult("Alalnlar boş geçilemez");
+            return new ErrorResult("Alanlar boş geçilemez");
         }
         return new SuccessResult();
     } 
     
     public Result isEmailTaken(String email) {
+    	System.out.println("------" +email);
         var candidates = userDao.findAll();
         for (var candidate : candidates) {
             if (candidate.getEmail().equals(email))
