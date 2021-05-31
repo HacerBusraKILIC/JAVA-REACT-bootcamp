@@ -12,5 +12,12 @@ public interface JobAdvertisementService {
 	
 	Result add(JobAdvertisement jobAdvertisement); 
 	
-	DataResult<List<JobAdvertisement>> getAllSortedCreationDate();
+	DataResult<List<JobAdvertisement>> getAllSortedCreationDate(int sortDirection);
+
+	DataResult<List<JobAdvertisement>> getByIsActive();
+	
+	DataResult<List<JobAdvertisement>>  getByEmployerIdAndIsActiveTrue(int employerId);
+
+    Result updateIsActive(boolean isActive, int id);
+
 }

@@ -14,7 +14,6 @@ import kodlamaio.hrms.core.utilities.results.SuccessDataResult;
 import kodlamaio.hrms.core.utilities.results.SuccessResult;
 import kodlamaio.hrms.dataAccess.abstracts.JobAdvertisementDao;
 import kodlamaio.hrms.entities.concretes.JobAdvertisement;
-import net.bytebuddy.asm.Advice.This;
 
 @Service
 public class JobAdvertisementManager implements JobAdvertisementService {
@@ -49,9 +48,34 @@ public class JobAdvertisementManager implements JobAdvertisementService {
 	}
 
 	@Override
-	public DataResult<List<JobAdvertisement>> getAllSortedCreationDate() {
-		Sort sort = Sort.by(Sort.Direction.ASC, "creationDate");
+	public DataResult<List<JobAdvertisement>> getAllSortedCreationDate(int sortDirection) {
+		Sort sort ;
+		 if (sortDirection == 0) {
+	            sort = Sort.by(Sort.Direction.DESC, "creationDate");
+	        } else {
+	            sort = Sort.by(Sort.Direction.ASC, "creationDate");
+	        }
+		
 		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.findAll(sort), "Başarılı");
 	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByIsActive() {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByIsActive(true), "Aktif iş ilanları listelendi");
+
+	}
+
+	@Override
+	public DataResult<List<JobAdvertisement>> getByEmployerIdAndIsActiveTrue(int employerId) {
+		return new SuccessDataResult<List<JobAdvertisement>>(this.jobAdvertisementDao.getByEmployerIdAndIsActiveTrue(employerId));
+
+	}
+
+	@Override
+	public Result updateIsActive(boolean isActive, int id) {
+		this.jobAdvertisementDao.updateIsActive(isActive, id);
+		return new SuccessResult("İş ilanı durumu güncellendi");
+	}
+
 
 }

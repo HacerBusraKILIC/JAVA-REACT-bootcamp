@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import kodlamaio.hrms.business.abstracts.JobAdvertisementService;
@@ -31,12 +32,28 @@ public class JobAdvertisementController {
 		return jobAdvertisementService.getAll();
 	}
 	
-	@GetMapping("getAllAscCreationDate")
-	DataResult<List<JobAdvertisement>> getAllAscCreationDate(){
-		return this.jobAdvertisementService.getAllSortedCreationDate();
+	@GetMapping("/getAllSortedCreationDate")
+	DataResult<List<JobAdvertisement>> getAllAscCreationDate(@RequestParam int sortDirection){
+		return this.jobAdvertisementService.getAllSortedCreationDate(sortDirection);
 	}
+	
+	@GetMapping("/getByIsActive")
+	DataResult<List<JobAdvertisement>> getByIsActive(){
+		return this.jobAdvertisementService.getByIsActive();
+	}
+	
+	@GetMapping("/getByEmployerIdAndIsActiveTrue")
+	DataResult<List<JobAdvertisement>> getByEmployerIdAndIsActiveTrue(@RequestParam 	int employerId){
+		return this.jobAdvertisementService.getByEmployerIdAndIsActiveTrue(employerId);
+	}
+	
 	@PostMapping("/add")
 	public Result add(@RequestBody JobAdvertisement jobAdvertisement) {
 		return this.jobAdvertisementService.add(jobAdvertisement);
 	}
+	
+    @PostMapping("/updateActivationStatus")
+    Result updateActivationStatus(@RequestParam boolean isActive, @RequestParam int id) {
+        return jobAdvertisementService.updateIsActive(isActive, id);
+    }
 }
