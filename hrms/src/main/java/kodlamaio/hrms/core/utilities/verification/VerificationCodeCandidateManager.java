@@ -1,6 +1,6 @@
 package kodlamaio.hrms.core.utilities.verification;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,7 +33,7 @@ public class VerificationCodeCandidateManager implements VerificationCodeCandida
         VerificationCodeCandidate verificationCode = new VerificationCodeCandidate();
         verificationCode.setCode(code);
         verificationCode.setCondidateId(entityId);
-        verificationCode.setVerificationDate(LocalDateTime.now());
+        verificationCode.setVerificationDate(LocalDate.now());
 
         verificationCodeCandidateDao.save(verificationCode);
         

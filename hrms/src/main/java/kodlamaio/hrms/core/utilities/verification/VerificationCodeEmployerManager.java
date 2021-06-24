@@ -1,6 +1,6 @@
 package kodlamaio.hrms.core.utilities.verification;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,7 +34,7 @@ public class VerificationCodeEmployerManager implements VerificationCodeEmployer
 		VerificationCodeEmployer verificationCode = new VerificationCodeEmployer();
 		verificationCode.setCode(code);
 		verificationCode.setEmployerId(entityId);
-		verificationCode.setVerificationDate(LocalDateTime.now());
+		verificationCode.setVerificationDate(LocalDate.now());
 		
 		verificationCodeEmployerDao.save(verificationCode);
 		return new SuccessResult("Verification işlemi başarılı");

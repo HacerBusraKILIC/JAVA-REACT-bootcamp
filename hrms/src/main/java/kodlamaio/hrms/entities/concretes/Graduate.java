@@ -1,39 +1,33 @@
 package kodlamaio.hrms.entities.concretes;
 
-import java.time.LocalDate;
+import java.util.List;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.Inheritance;
-import javax.persistence.InheritanceType;
 import javax.persistence.Table;
+import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name="verification_codes")
+@Table(name = "edu_graduates")
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Inheritance(strategy = InheritanceType.JOINED)
-public class VerificationCode {
-	
+public class Graduate {
+	// Lisans yüksel lisans vs tablosu
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-    @Column(name="id")
+	@Column(name = "id")
 	private int id;
 	
-	@Column(name="code")
-	private String code;
-	 
-	@Column(name="is_verified")
-	private boolean isVerified;
+	@Column(name = "description")
+	@NotBlank(message = "Boş geçilemez")
+	private String description;
 	
-	@Column(name="verification_date")
-	private LocalDate verificationDate = LocalDate.now();;
 }
